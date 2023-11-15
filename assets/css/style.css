@@ -1,0 +1,349 @@
+/*   Theme default css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap'); 
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400; 
+  color: #666666;
+  font-size: 16px; }
+
+  
+button {
+  cursor: pointer; }
+
+a:focus,
+.button:focus {
+  text-decoration: none;
+  outline: none; }
+
+a:focus,
+a:hover {
+  color: inherit;
+  text-decoration: none; }
+
+a,
+button {
+  color: inherit;
+  outline: medium none; }
+
+button:focus, input:focus, input:focus, textarea, textarea:focus {
+  outline: 0; }
+
+ 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Montserrat', sans-serif; 
+  color: #444;
+  margin-top: 0px; 
+  font-weight: 500;
+  text-transform: normal;
+ }
+
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: inherit; }
+
+h1 {
+  font-size: 40px;
+  font-weight: 500; }
+
+h2 {
+  font-size: 35px; }
+
+h3 {
+  font-size: 28px; }
+
+h4 {
+  font-size: 22px; }
+
+h5 {
+  font-size: 18px; }
+
+h6 {
+  font-size: 16px; }
+
+ul {
+  margin: 0px;
+  padding: 0px; }
+
+li {
+  list-style: none; }
+
+ img{
+  max-width: 100%;
+ }
+a{
+  text-decoration:  none;
+}
+
+.pdBlk{
+  padding: 10px 15px;
+}
+
+
+/* default-css END 
+================================== */
+ 
+
+
+.header-area { 
+  width: 100%;
+  z-index: 99; 
+  border-bottom:1px solid #ededed;
+}  
+.logo-area a {
+  display: flex;
+  margin: auto;
+  text-align: center;
+  width: max-content;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600; 
+  font-size: 20px;
+}
+a.theme-btn {
+  background: white;
+  display: inline-block;
+  padding: 0 50px;
+  height: 48px;
+  color: #ff4900;
+  line-height: 48px;
+  border-radius: 30px;
+  border: 2px solid white;
+  font-weight: 700;
+  transition: .3s;
+}   
+ 
+.logo-area a img {
+  max-height: 100px;
+}
+.dblk {
+  border: 1px solid #dfdfdf;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+.dblk h4 {
+  padding: 15px;
+  font-weight: 700;
+  border-bottom: 1px solid #e7e7e7;
+}
+.lblk {
+  margin-bottom: 20px;
+  display: block;
+  font-weight: 600;
+  text-decoration: underline;
+  background: #00000014;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: .3s;
+}
+.lblk img {
+  display: block;
+  width: 100%;
+  height: 238px;
+  object-fit: cover;
+  object-position: center;
+}
+.lblk b {
+  padding: 11px 15px;
+  display: block;
+}
+.crateLink {
+  text-align: center;
+  padding: 50px;
+  margin: 30px 0;
+  background: #ededed;
+  border-radius: 10px;
+}
+.dtl-blk {
+  display: block;
+  text-align: center;
+}
+ 
+
+.dtl-blk .img {
+  display: block;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: auto;
+}
+
+.dtl-blk .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dtl-blk  ul {
+  margin-top: 15px;
+}
+
+.dtl-blk ul li {
+  font-weight: 500;
+}
+
+.dtl-blk ul li b {
+  font-weight: 700;
+}
+
+.dtl-blk ul li iframe {
+  display: block;
+  width: 100%;
+  margin-top: 30px;
+}
+.results .image {
+  display: block;
+  width: 100%;
+  margin-bottom: 25px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.results .image img {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover; 
+}
+
+form.CreateNowLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 700px;
+  margin: 40px auto;
+  border: 1px solid black;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+form.CreateNowLink button {
+  display: block;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 700;
+  color: #fff;
+  background: #000;
+}
+
+form.CreateNowLink input {
+  display: block;
+  width: 100%;
+  height: 44px;
+  border: none;
+  padding: 10px;
+}
+.results .image a {
+  display: block;
+}
+
+.results .image a.button {
+  display: block;
+  width: 100%;
+  padding: 6px 25px;
+  background: #1d8b22;
+  text-align: center;
+  color: #fff;
+}
+
+
+
+.copy-text {
+	position: relative;
+	padding: 10px;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	display: flex;
+  justify-content: space-between;
+}
+.copy-text input {
+	padding: 10px;
+	font-size: 18px;
+	color: #555;
+	border: none;
+	outline: none;
+  width: 100%;
+}
+.copy-text button {
+	padding: 10px;
+	background: #5784f5;
+	color: #fff;
+	font-size: 18px;
+	border: none;
+	outline: none;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.copy-text button:active {
+	background: #809ce2;
+}
+.copy-text button:before {
+	content: "Copied";
+	position: absolute;
+	top: -45px;
+	right: 0px;
+	background: #5c81dc;
+	padding: 8px 10px;
+	border-radius: 20px;
+	font-size: 15px;
+	display: none;
+}
+.copy-text button:after {
+	content: "";
+	position: absolute;
+	top: -20px;
+	right: 25px;
+	width: 10px;
+	height: 10px;
+	background: #5c81dc;
+	transform: rotate(45deg);
+	display: none;
+}
+.copy-text.active button:before,
+.copy-text.active button:after {
+	display: block;
+}
+.successFullyDone {
+  margin: 50px 0;
+}
+
+.successFullyDone h2 {
+  color: #70c306;
+}
+.wvu {
+  display: block;
+  margin: 20px 0;
+}
+.wvu i{
+  display: block;
+  color: red;
+}
+.wvu img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* small screen :320px. */
+@media (max-width: 767px) {
+
+ 
+}
+ 
+
+
