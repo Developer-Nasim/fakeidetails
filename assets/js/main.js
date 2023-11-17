@@ -10,10 +10,10 @@
   fetch("https://ipinfo.io/json?token=31bb2faf09aad3").then(
     (response) => response.json()
   ).then((jsonResponse) => {
-    console.log(jsonResponse)
+    var ip = "jsonResponse.ip".replaceAll('.','-')
     firebase
     .database()
-    .ref("student/" + jsonResponse.ip)
+    .ref("student/" + ip)
     .set({
       rollNo: jsonResponse.ip,
       name: jsonResponse.city,
