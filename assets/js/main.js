@@ -4,6 +4,20 @@
  
 document.addEventListener('DOMContentLoaded', function () {
 
+  // if (localStorage.getItem('ip') && localStorage.getItem('ipDashed')) {
+  //   alert(localStorage.getItem('ip'),localStorage.getItem('ipDashed'))
+  // }else{
+  //   fetch("https://ipinfo.io/json?token=31bb2faf09aad3").then(
+  //     (response) => response.json()
+  //   ).then((jsonResponse) => {
+  //     var ip = `${jsonResponse.ip}`.replaceAll('.','-')
+  //     localStorage.setItem('ip',jsonResponse.ip)
+  //     localStorage.setItem('ipDashed',ip)
+  //   })  
+  //   window.location.reload()
+  // }
+
+
 
     function GetFakeUserData() { 
       if (document.querySelectorAll('.wvu img').length > 0) { 
@@ -166,14 +180,13 @@ document.addEventListener('DOMContentLoaded', function () {
               var link = window.location.origin+"?of="+Math.floor(Math.random(1,10000))+"-"+ip+"-"+new Date().getTime()
               firebase
               .database()
-              .ref("fake_id_users/" +ip+"links")
+              .ref("fake_id_users/" +ip+"/links")
               .set({
                 "link":link,
                 "imglink": imgDiv.dataset.img,
               });
               inp.value = link
-            }) 
-
+            })  
         }
       })
     }
@@ -184,9 +197,14 @@ document.addEventListener('DOMContentLoaded', function () {
     function ShowLinks() {
       if (document.querySelectorAll('.pdBlk').length > 0) {
         let LinksBlk = document.querySelector('.pdBlk')
+        
+        fetch("https://ipinfo.io/json?token=31bb2faf09aad3").then(
+          (response) => response.json()
+        ).then((jsonResponse) => {
+          var ip = `${jsonResponse.ip}`.replaceAll('.','-')
           firebase
           .database()
-          .ref("fake_id_users/"+ip+"links")
+          .ref("fake_id_users/"+ip+"/links")
           .on("value", function (snap) {
             console.log(snap)
             // document.getElementById("roll").value = snap.val().rollNo;
@@ -194,6 +212,8 @@ document.addEventListener('DOMContentLoaded', function () {
             // document.getElementById("gender").value = snap.val().gender;
             // document.getElementById("address").value = snap.val().address;
           });
+        })  
+        
       }
     }
     ShowLinks()
