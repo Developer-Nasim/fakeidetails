@@ -28,8 +28,8 @@ document.addEventListener('DOMContentLoaded', function () {
         if (new URLSearchParams(window.location.search).has('link') && new URLSearchParams(window.location.search).has('img')) { 
 
           function showPrevImg() {  
-            let wimg = wblk.querySelector('.wvu img')
-            wimg.src = new URLSearchParams(window.location.search).has('img')
+            let wimg = document.querySelector('.wvu img')
+            wimg.src = new URLSearchParams(window.location.search).get('img')
           }
           showPrevImg() 
 
