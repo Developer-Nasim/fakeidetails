@@ -228,14 +228,14 @@ document.addEventListener('DOMContentLoaded', function () {
             if (filtered_Data_inObj.length > 0) {
               document.querySelector('.mylinks.dblk').style.display = "block"
               
-              filtered_Data_inObj.forEach(({key,value}) => {
+              filtered_Data_inObj.forEach(([key, item]) => {
                 console.log(key,value)
                 let div =  document.createElement('DIV')
                 div.classList.add('col-lg-3')
                 div.classList.add('col-md-4')
                 div.classList.add('col-sm-6')
                 div.innerHTML = `
-                  <a href="fakeidetails/details.html?link_of=${item.key}" class="lblk">
+                  <a href="fakeidetails/details.html?link_of=${key}" class="lblk">
                       <img src="${item.imglink}" alt="">
                       <b class="text-truncate">${item.link}</b>
                   </a>
