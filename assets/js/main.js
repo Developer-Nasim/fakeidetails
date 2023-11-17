@@ -19,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+
+
   var uniqueNum = Math.floor(Math.random(1,1000000))+new Date().getTime()
 
     function GetFakeUserData() {
@@ -226,8 +228,8 @@ document.addEventListener('DOMContentLoaded', function () {
             if (filtered_Data_inObj.length > 0) {
               document.querySelector('.mylinks.dblk').style.display = "block"
               
-              filtered_Data_inObj.forEach(item => {
-                console.log(item)
+              filtered_Data_inObj.forEach(({key,value}) => {
+                console.log(key,value)
                 let div =  document.createElement('DIV')
                 div.classList.add('col-lg-3')
                 div.classList.add('col-md-4')

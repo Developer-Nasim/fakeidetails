@@ -360,7 +360,14 @@ form.CreateNowLink input {
   width: 100%;
   height: auto;
 }
-
+.alert {
+  position: fixed;
+  width: 95%;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  z-index: 9999;
+}
 /* small screen :320px. */
 @media (max-width: 767px) {
 
