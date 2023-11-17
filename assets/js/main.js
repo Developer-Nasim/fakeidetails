@@ -232,12 +232,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 div.classList.add('col-md-4')
                 div.classList.add('col-sm-6')
                 div.innerHTML = `
-                  <a href="fakeidetails/details.html?link_of=${key}" class="lblk">
+                  <a href="/details.html?link_of=${key}" class="lblk">
                       <img src="${item.imglink}" alt="">
                       <b class="text-truncate">${item.link}</b>
                   </a>
                 `
-                LinksBlk.appendChild(div)
+                LinksBlk.prependChild(div)
     
 
               })
