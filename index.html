@@ -50,10 +50,17 @@
         </div>
     </section>
     <!-- Linksarea END -->
+ 
 
-
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>Important Alert!</strong> In this platform, if you will create a link and share with others then you may see some of there data link their Device name,location,photo etc. but Remember if there happen any issue then we are not resposible for that, if you us this platform this your are responsible for that. we build this platoform only to detect fake user so us this to get fake user data to stay safe
+    <div class="alert alert-warning alert-dismissible fade show" role="alert"> 
+        <input type="checkbox" hidden class="read-more-state" id="read-more"> 
+        <div class="read-more-wrap">  
+            <strong>Important Alert!</strong> In this platform, <span class="read-more-target">  if you will create a link and share with others then you may see some of there data link their Device name,location,photo etc. but Remember if there happen any issue then we are not resposible for that, if you us this platform this your are responsible for that. we build this platoform only to detect fake user so us this to get fake user data to stay safe</span> 
+        </div>
+        <div>
+            <label for="read-more" class="read-more-trigger_closed">Read More</label>
+            <label for="read-more" class="read-more-trigger_opened">Read Less</label>
+        </div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 

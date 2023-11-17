@@ -231,9 +231,10 @@ body.not_clicked_yet .dtl-blk .empty{
   font-weight: 700;
 }
 
-.dtl-blk ul li iframe {
+.dtl-blk ul li iframe,.dtl-blk ul li #locationOfUser {
   display: block;
   width: 100%;
+  height: 450px;
   margin-top: 30px;
 }
 .results .image {
@@ -244,7 +245,20 @@ body.not_clicked_yet .dtl-blk .empty{
   overflow: hidden;
   cursor: pointer;
 }
+a.bkh {
+  display: inline-block;
+  padding: 10px 20px;
+  background: red;
+  margin-top: 30px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 600;
+  transition: .3s;
+}
 
+a.bkh:hover {
+  background: #508d2e;
+}
 .results .image img {
   display: block;
   width: 100%;
@@ -400,11 +414,62 @@ form.CreateNowLink input {
   bottom: 10px;
   transform: translateX(-50%);
   z-index: 9999;
+  font-size: 80%;
 } 
+.alert > div{
+  max-width: 100%;
+  display: inline-block;
+  width: max-content;
+}
+.alert > div label {
+  text-decoration: underline;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.read-more-target,
+.read-more-trigger_opened {
+  display: none;
+}
+.read-more-state:checked ~ .read-more-wrap .read-more-target,
+.read-more-state:checked ~ .read-more-trigger_opened {
+  display: inline-block;
+}
+.read-more-state:checked ~ .read-more-trigger_closed {
+  display: none;
+}
+
+
+
+
+
+
 /* small screen :320px. */
 @media (max-width: 767px) {
+.crateLink { 
+  padding: 25px; 
+}
+.dblk h4 { 
+  font-size: 18px;
+  overflow: auto;
+}
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
  
 
