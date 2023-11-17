@@ -220,15 +220,12 @@ document.addEventListener('DOMContentLoaded', function () {
               Object.entries(data)
                 .filter(([key, value]) => value.ip === ip)
             );
-
-            const filtered_Data_inObj = Object.keys(filteredData);
  
-
-
-            if (filtered_Data_inObj.length > 0) {
+ 
+            if (Object.keys(filteredData).length > 0) {
               document.querySelector('.mylinks.dblk').style.display = "block"
               
-              filtered_Data_inObj.forEach(([key, item]) => {
+              Object.entries(filteredData).forEach(([key, item]) => {
                 console.log(key,item)
                 let div =  document.createElement('DIV')
                 div.classList.add('col-lg-3')
@@ -247,10 +244,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
 
-
-
-
-            console.log(filteredData);
+ 
           });
         })  
         
