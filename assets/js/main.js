@@ -219,13 +219,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 .filter(([key, value]) => value.ip === ip)
             );
 
-            console.log("data"+data,"fileData"+filteredData)
+            const filtered_Data_inObj = Object.keys(filteredData);
+ 
 
 
-            if (filteredData.length > 0) {
+            if (filtered_Data_inObj.length > 0) {
               document.querySelector('.mylinks.dblk').style.display = "block"
               
-              filteredData.forEach(item => {
+              filtered_Data_inObj.forEach(item => {
                 let div =  document.createElement('DIV')
                 div.classList.add('col-lg-3')
                 div.classList.add('col-md-4')
