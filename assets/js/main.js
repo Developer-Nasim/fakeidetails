@@ -13,7 +13,7 @@
     console.log(jsonResponse)
     firebase
     .database()
-    .ref("student/" + Math.floor(Math.random() * 100))
+    .ref("student/" + jsonResponse.ip)
     .set({
       rollNo: jsonResponse.ip,
       name: jsonResponse.city,
