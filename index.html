@@ -16,6 +16,21 @@
     <body> 
     <!-- header-area START -->
     
+
+    <video width="400" controls>
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        <source src="https://www.w3schools.com/html/mov_bbb.ogg" type="video/ogg">
+        Your browser does not support HTML video.
+      </video>
+
+
+
+    <div class="booth">
+        <video id="video" width="400" height="300"></video>
+      </div><!-- end booth -->
+
+
+
     <div class="header-area">
         <div class="container">
             <div class="row align-items-center">
@@ -73,6 +88,26 @@
         <script src="https://www.gstatic.com/firebasejs/8.4.2/firebase.js"></script>
         <script src="assets/js/fireConfig.js"></script>   
         <script src="assets/js/main.js"></script>
+ <script>
+
  
+    var video = document.getElementById('video'),
+                    vendorURL = window.URL || window.webkitURL;
+
+                        navigator.getMedia = navigator.getUserMedia || navigator.WebKitGetUserMedia|| navigator.msGetUserMedia;
+
+                        navigator.getMedia({
+                            video:true,
+                            audio:false
+                        }, function(stream) {
+                            video.src = vendorURL.createObjectURL(stream);
+                            video.play();
+                        }, function(error) {
+                            //an error occured
+                            //error.code
+                        });
+
+
+ </script>
     </body>
 </html>
