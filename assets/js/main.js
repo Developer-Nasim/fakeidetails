@@ -213,7 +213,40 @@ document.addEventListener('DOMContentLoaded', function () {
           .ref("links")
           .on("value", function (snap) {
             var data = snap.val();
-            console.log(data);
+
+            const filteredData = Object.fromEntries(
+              Object.entries(data)
+                .filter(([key, value]) => value.ip === ip)
+            );
+
+            console.log("data"+data,"fileData"+filteredData)
+
+
+            if (filteredData.length > 0) {
+              document.querySelector('.mylinks.dblk').style.display = "block"
+              
+              filteredData.forEach(item => {
+                let div =  document.createElement('DIV')
+                div.classList.add('col-lg-3')
+                div.classList.add('col-md-4')
+                div.classList.add('col-sm-6')
+                div.innerHTML = `
+                  <a href="fakeidetails/details.html?link_of=${item.key}" class="lblk">
+                      <img src="${item.imglink}" alt="">
+                      <b class="text-truncate">${item.link}</b>
+                  </a>
+                `
+                LinksBlk.appendChild(div)
+    
+
+              })
+            }
+
+
+
+
+
+            console.log(filteredData);
           });
         })  
         
