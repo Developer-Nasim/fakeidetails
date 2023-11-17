@@ -124,6 +124,37 @@ a.theme-btn {
 .logo-area a img {
   max-height: 100px;
 }
+.empty{ 
+  z-index: 99; 
+  text-align: center;
+  padding: 60px 10px;
+  display: none; 
+}
+.empty h2{
+  font-size: 30px; 
+  color: red;  
+  font-weight: 700;
+}
+.empty a {
+  padding: 8px 20px;
+  background: red;
+  margin-top: 10px;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: 500;
+  display: inline-block;
+}
+body.not_clicked_yet .dtl-blk .img,
+body.not_clicked_yet .dtl-blk .showDetailsHere{
+  display: none;
+} 
+body.not_clicked_yet .dtl-blk .empty{
+  display: block;
+}
+
+
+
+
 .dblk {
   border: 1px solid #dfdfdf;
   margin-bottom: 15px;
@@ -368,10 +399,7 @@ form.CreateNowLink input {
   bottom: 10px;
   transform: translateX(-50%);
   z-index: 9999;
-}
-.mylinks .pdBlk {
-  flex-direction: row-reverse;
-}
+} 
 /* small screen :320px. */
 @media (max-width: 767px) {
 

