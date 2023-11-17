@@ -10,9 +10,15 @@
   fetch("https://ipinfo.io/json?token=31bb2faf09aad3").then(
     (response) => response.json()
   ).then(
-    (jsonResponse) => console.log(jsonResponse)
+    (jsonResponse) => {
+      firebase
+        .database()
+        .ref("student/" + rollV)
+        .set({
+          jsonResponse
+        });
+    }
   )
-
       
 
 
