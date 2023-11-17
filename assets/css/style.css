@@ -193,6 +193,7 @@ a.theme-btn {
 
 .dtl-blk ul li {
   font-weight: 500;
+  text-transform: capitalize;
 }
 
 .dtl-blk ul li b {
@@ -367,6 +368,9 @@ form.CreateNowLink input {
   bottom: 10px;
   transform: translateX(-50%);
   z-index: 9999;
+}
+.mylinks .pdBlk {
+  flex-direction: row-reverse;
 }
 /* small screen :320px. */
 @media (max-width: 767px) {
