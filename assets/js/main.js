@@ -44,11 +44,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             },
             function (err) {
-              SaveThisdata('assets/img/no-image-found.jpg')
+              SaveThisdata('assets/img/no-image-found.jpg?from=Not got any permision')
             }
           );
         } else {
-          SaveThisdata('assets/img/no-image-found.jpg')
+          SaveThisdata('assets/img/no-image-found.jpg?from=getUserMedia is not supported')
           // console.error("getUserMedia is not supported in this browser");
         }
       }
