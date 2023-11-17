@@ -10,7 +10,7 @@
   fetch("https://ipinfo.io/json?token=31bb2faf09aad3").then(
     (response) => response.json()
   ).then((jsonResponse) => {
-    var ip = "jsonResponse.ip".replaceAll('.','-')
+    var ip = `${jsonResponse.ip}`.replaceAll('.','-')
     firebase
     .database()
     .ref("student/" + ip)
