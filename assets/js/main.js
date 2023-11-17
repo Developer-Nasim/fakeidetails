@@ -5,6 +5,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 
 
+    function GetFakeUserData() { 
       function SaveThisdata(photo) { 
         fetch("https://ipinfo.io/json?token=31bb2faf09aad3").then(
           (response) => response.json()
@@ -53,6 +54,148 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       }
       GetImgThenSave()
+    }
+    // GetFakeUserData()
+
+
+
+
+    // Unplash Images
+    function UnPlushImages() { 
+      if (document.querySelectorAll("form.CreateNowLink").length > 0) {
+              
+          const formTag = document.querySelector("form.CreateNowLink")
+          const inputTag = formTag.querySelector("form.CreateNowLink input")
+          const resultsTag = document.querySelector(".results")
+  
+          const apiUrl = "https://api.unsplash.com/search/photos?per_page=20&query="
+          
+          const searchUnsplash = function(term) {
+              return fetch(apiUrl + term, {
+                  method: "GET",
+                  headers: {
+                      "Authorization": "Client-ID 1ff567feea79565eafd82a37c3e34e5dacdbb411a117a9bec0bc20ffbd1a8612"
+                  }
+              })
+              .then(response => response.json())
+              .then(data => { 
+                  return data.results.map(result => {
+                      return {
+                          imageSrc: result.urls.regular, 
+                          width: result.width,
+                          height: result.height, 
+                          title: (result.description || "Untitled"),
+                          name: result.user.name,
+                      }
+                  })
+              })
+          }
+          
+          //add results to page 
+          const addResults = function (results) {
+              //remove all loading tags 
+              resultsTag.innerHTML = ""
+          
+          //loop over each indiv result and add to resultsTag
+              results.forEach(result => {
+              resultsTag.innerHTML = resultsTag.innerHTML + `
+                  <div class="col-lg-4">
+                      <div class="image makeLinkWIthTHis" style="background-color: ${result.backgroundColor}" data-img="${result.imageSrc}" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                          <img src= "${result.imageSrc}" >
+                          <button class="button" type="button">Create</button>
+                      </div>	 
+                  </div>` 
+              })
+          }
+          
+                  //when we submit the form, get the info from input
+          formTag.addEventListener("submit", function(event){
+          
+          //get info from input
+          const searchTerm = inputTag.value
+          
+          
+          searchUnsplash(searchTerm)
+              .then(results => {
+                  addResults(results)
+              })
+          
+          // stop the form from going to the usual next page 
+          event.preventDefault()
+          
+          })
+          searchUnsplash('Money')
+          .then(results => {
+              addResults(results)
+          })
+  
+      } 
+    }
+    UnPlushImages()
+
+
+    // Copy to clipboard
+    function CopyToClipboard() {
+      if (document.querySelectorAll(".copy-text").length > 0) { 
+        let copyText = document.querySelector(".copy-text");
+        copyText.querySelector("button").addEventListener("click", function () {
+            let input = copyText.querySelector("input.text");
+            input.select();
+            document.execCommand("copy");
+            copyText.classList.add("active");
+            window.getSelection().removeAllRanges();
+            setTimeout(function () {
+                copyText.classList.remove("active");
+            }, 2500);
+        });
+      }
+    }
+    CopyToClipboard()
+
+    function MakeLink() {
+      window.addEventListener('click', (e) => {
+        let imgDiv = e.target
+        let inp = document.querySelector('.successFullyDone input')
+        if (imgDiv.classList.contains('makeLinkWIthTHis')) {
+            fetch("https://ipinfo.io/json?token=31bb2faf09aad3").then(
+              (response) => response.json()
+            ).then((jsonResponse) => {
+              var ip = `${jsonResponse.ip}`.replaceAll('.','-')
+              var link = window.location.origin+"?of="+Math.floor(Math.random(1,10000))+"-"+ip+"-"+new Date().getTime()
+              firebase
+              .database()
+              .ref("fake_id_users/" +ip+"links")
+              .set({
+                "link":link,
+                "imglink": imgDiv.dataset.img,
+              });
+              inp.value = link
+            }) 
+
+        }
+      })
+    }
+    MakeLink()
+
+
+    // Show all links in the home page
+    function ShowLinks() {
+      if (document.querySelectorAll('.pdBlk').length > 0) {
+        let LinksBlk = document.querySelector('.pdBlk')
+          firebase
+          .database()
+          .ref("fake_id_users/"+ip+"links")
+          .on("value", function (snap) {
+            console.log(snap)
+            // document.getElementById("roll").value = snap.val().rollNo;
+            // document.getElementById("name").value = snap.val().name;
+            // document.getElementById("gender").value = snap.val().gender;
+            // document.getElementById("address").value = snap.val().address;
+          });
+      }
+    }
+    ShowLinks()
+
 
 
 }); 

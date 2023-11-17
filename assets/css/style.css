@@ -210,13 +210,31 @@ a.theme-btn {
   margin-bottom: 25px;
   border-radius: 5px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .results .image img {
   display: block;
   width: 100%;
   height: 200px;
-  object-fit: cover; 
+  object-fit: cover;
+  cursor: pointer;
+  transition: .3s;
+}
+.results .image:hover img{
+  transform: scale(1.1);
+}
+.results .image .button {
+  position: relative;
+  z-index: 99;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  padding: 6px 25px;
+  background: #1d8b22;
+  text-align: center;
+  color: #fff;
+  border: none;
 }
 
 form.CreateNowLink {
@@ -245,38 +263,25 @@ form.CreateNowLink input {
   height: 44px;
   border: none;
   padding: 10px;
-}
-.results .image a {
-  display: block;
-}
+} 
 
-.results .image a.button {
-  display: block;
-  width: 100%;
-  padding: 6px 25px;
-  background: #1d8b22;
-  text-align: center;
-  color: #fff;
-}
 
 
 
 .copy-text {
-	position: relative;
-	padding: 10px;
-	background: #fff;
-	border: 1px solid #ddd;
-	border-radius: 10px;
-	display: flex;
-  justify-content: space-between;
+	position: relative; 
 }
 .copy-text input {
 	padding: 10px;
 	font-size: 18px;
 	color: #555;
 	border: none;
+	background: #fff;
+	border: 1px solid #ddd;
+	border-radius: 10px;
 	outline: none;
   width: 100%;
+  margin-bottom: 10px;
 }
 .copy-text button {
 	padding: 10px;
@@ -319,11 +324,28 @@ form.CreateNowLink input {
 	display: block;
 }
 .successFullyDone {
-  margin: 50px 0;
+  margin: 35px 0;
 }
 
 .successFullyDone h2 {
   color: #70c306;
+}
+.makeLinkWIthTHis a,.makeLinkWIthTHis img{
+  pointer-events: none;
+}
+.modal-body > a {
+  width: max-content;
+  display: block;
+  margin-left: auto;
+  color: red;
+  padding: 0;
+  border: none;
+  line-height: 0;
+  background: none;
+}
+.modal-body > a svg{
+  width: 35px;
+  height: auto;
 }
 .wvu {
   display: block;
