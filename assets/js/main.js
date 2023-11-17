@@ -229,7 +229,7 @@ document.addEventListener('DOMContentLoaded', function () {
               document.querySelector('.mylinks.dblk').style.display = "block"
               
               filtered_Data_inObj.forEach(([key, item]) => {
-                console.log(key,value)
+                console.log(key,item)
                 let div =  document.createElement('DIV')
                 div.classList.add('col-lg-3')
                 div.classList.add('col-md-4')
