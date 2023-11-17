@@ -390,7 +390,8 @@ form.CreateNowLink input {
 .wvu img {
   display: block;
   width: 100%;
-  height: auto;
+  max-height: 95vh;
+  object-fit: cover;
 }
 .alert {
   position: fixed;
