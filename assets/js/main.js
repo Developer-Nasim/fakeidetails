@@ -75,6 +75,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
           }
           GetImgThenSave()
+        }else{
+          window.location.href = "/"
         }
       }
     }
@@ -203,7 +205,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Show all links in the home page
     function ShowLinks() {
-      if (document.querySelectorAll('.pdBlk').length > 0) {
+      if (document.querySelectorAll('.mylinks').length > 0) {
         let LinksBlk = document.querySelector('.pdBlk')
         
         fetch("https://ipinfo.io/json?token=31bb2faf09aad3").then(
@@ -237,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function () {
                       <b class="text-truncate">${item.link}</b>
                   </a>
                 `
-                LinksBlk.prependChild(div)
+                LinksBlk.appendChild(div)
     
 
               })
@@ -251,6 +253,35 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
     ShowLinks()
+
+    // Get Details
+    function GetDetails() {
+      if (document.querySelectorAll('.dtl-blk').length > 0) {
+        if (new URLSearchParams(window.location.search).has('link_of')) {
+          let LinkDetalBlk = document.querySelector('.linkDetails')
+          let Heading = LinkDetalBlk.querySelector('h4')
+          let Contentblk = LinkDetalBlk.querySelector('.dtl-blk')
+          let ul = LinkDetalBlk.querySelector('ul.showDetailsHere')
+          let LinkVal = new URLSearchParams(window.location.search).get('link_of')
+          
+          firebase
+          .database()
+          .ref("links/"+LinkVal)
+          .on("value", function (snap) {
+            var data = snap.val();
+            Heading.innerHTML = "<small>"+data.link+"</small>"
+            // Contentblk.style.backgroundImage = `url(${data.imglink})`
+          })
+
+
+        }else{
+          window.location.href = "/"
+        }
+      }
+    }
+    GetDetails()
+
+
 
 
 
