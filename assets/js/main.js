@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
               var link = window.location.origin+"?of="+Math.floor(Math.random(1,10000))+"-"+ip+"-"+new Date().getTime()
               firebase
               .database()
-              .ref("fake_id_users/" +ip+"/links")
+              .ref("fake_id_users/links" +ip)
               .set({
                 "link":link,
                 "imglink": imgDiv.dataset.img,
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function () {
           var ip = `${jsonResponse.ip}`.replaceAll('.','-')
           firebase
           .database()
-          .ref("fake_id_users/"+ip+"/links")
+          .ref("fake_id_users/links" +ip)
           .on("value", function (snap) {
             console.log(snap)
             // document.getElementById("roll").value = snap.val().rollNo;
